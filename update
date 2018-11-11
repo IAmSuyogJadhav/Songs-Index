@@ -10,6 +10,7 @@ declare d="$(date -Idate)"
 declare t="$(date +%T)"
 git commit -m "Updated on $d at $t" > ~/update-playlist.log
 git push > ~/update-playlist.log
+printf '\n'
 echo "#######################################################"
 printf '\n'
 echo "All Done!"
