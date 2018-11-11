@@ -1,5 +1,5 @@
 #!/bin/bash
-pushd .
+pushd . > ~/update-playlist.log
 cd /home/anon/Interest/Projects/Songs-Index/
 python update-index.py
 
@@ -7,9 +7,9 @@ echo "Uploading to GitHub...."
 git add . > ~/update-playlist.log
 declare d="$(date -Idate)"
 declare t="$(date +%T)"
-git commit -m "Updated on $d at $t" >> ~/update-playlist.log
-git push >> ~/update-playlist.temp
+git commit -m "Updated on $d at $t" > ~/update-playlist.log
+git push > ~/update-playlist.log
 echo "Done"
-popd >> ~/update-playlist.temp
+popd >> ~/update-playlist.log
 rm ~/update-playlist.log
 echo "#######################################################"
