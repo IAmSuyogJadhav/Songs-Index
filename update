@@ -9,6 +9,7 @@ declare d="$(date -Idate)"
 declare t="$(date +%T)"
 git commit -m "Updated on $d at $t" > ~/update-playlist.log
 git push > ~/update-playlist.log
+echo "#######################################################"
 echo "All Done!"
 echo "View the latest index here:"
 printf "\t "
