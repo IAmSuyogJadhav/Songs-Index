@@ -10,6 +10,8 @@ declare t="$(date +%T)"
 git commit -m "Updated on $d at $t" > ~/update-playlist.log
 git push > ~/update-playlist.log
 echo "All Done!"
+echo "View index here:"
+printf "\t "
 popd >> ~/update-playlist.log
 rm ~/update-playlist.log
 echo "#######################################################"
