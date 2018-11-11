@@ -13,7 +13,7 @@ def parse_songs(_songs):
     step = 25 / len(_songs)
 
     for i, song in enumerate(_songs):
-        stamp = datetime.fromtimestamp(os.path.getmtime(telegram_path + song))
+        stamp = datetime.fromtimestamp(os.path.getmtime(songs_path + song))
         date = '-'.join(list(map(str, [stamp.day, stamp.month, stamp.year])))
 
         try:
@@ -37,17 +37,18 @@ def parse_songs(_songs):
                         )
 
 
-# Path to the Telegram Downloads folder and the index file
-telegram_path = r'/home/anon/Downloads/Telegram Desktop/'
+# Path to the songs folder and the index file
+songs_path = r'/home/anon/Downloads/Telegram Desktop/'
 index_path = r'/home/anon/Interest/Projects/Songs-Index/index.xlsx'
+format = '.m4a'
 
 print("#######################################################")
 print("\nLoading the list of songs....", end='')
-songs = [filename for filename in os.listdir(telegram_path)
-         if filename.endswith('.m4a')]
+songs = [filename for filename in os.listdir(songs_path)
+         if filename.endswith(format)]
 # Sort by date modified
 songs = sorted(songs,
-               key=lambda x: os.path.getmtime(telegram_path + x),
+               key=lambda x: os.path.getmtime(songs_path + x),
                reverse=False)
 print('Done')
 print(f"\nTotal no. of songs in the playlist: {len(songs)}")

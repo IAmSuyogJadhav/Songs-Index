@@ -4,7 +4,8 @@ cd /home/anon/Interest/Projects/Songs-Index/
 python update-index.py
 
 echo "Uploading to GitHub...."
-git add . > ~/update-playlist.log
+git pull > ~/update-playlist.log
+git add . >> ~/update-playlist.log
 declare d="$(date -Idate)"
 declare t="$(date +%T)"
 git commit -m "Updated on $d at $t" > ~/update-playlist.log
