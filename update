@@ -3,17 +3,19 @@ pushd . > ~/update-playlist.log
 cd /home/anon/Interest/Projects/Songs-Index/
 python update-index.py
 
-echo "\nUploading to GitHub...."
+echo "Uploading to GitHub...."
 git add . > ~/update-playlist.log
 declare d="$(date -Idate)"
 declare t="$(date +%T)"
 git commit -m "Updated on $d at $t" > ~/update-playlist.log
 git push > ~/update-playlist.log
 echo "#######################################################"
-echo "\nAll Done!"
+printf('\n')
+echo "All Done!"
 echo "View the latest index here:"
 printf "\t "
 echo "http://bit.do/Songs-Index"
 popd >> ~/update-playlist.log
 rm ~/update-playlist.log
-echo "\n#######################################################"
+printf('\n')
+echo "#######################################################"
