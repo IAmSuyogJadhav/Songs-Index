@@ -58,7 +58,7 @@ print('Done.')
 print("Saving the Index file....", end='')
 
 try:
-    parsed.to_excel(index_path, index=True, sheet_name='Songs')  #, sep='\t')
+    parsed.to_excel(index_path, index=True, sheet_name='Songs')
     print('Done')
 
 except Exception as e:
