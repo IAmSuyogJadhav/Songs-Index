@@ -2,9 +2,13 @@
 pushd .
 cd /home/anon/Interest/Projects/Songs-Index/
 python update-index.py
-git add .
+
+printf "Uploading to GitHub...."
+git add . > ~/update-playlist.log
 declare d="$(date -Idate)"
 declare t="$(date +%T)"
-git commit -m "Updated on $d at $t"
-git push
-popd
+git commit -m "Updated on $d at $t" >> ~/update-playlist.log
+git push >> ~/update-playlist.temp
+echo "Done"
+popd >> ~/update-playlist.temp
+rm ~/update-playlist.log
