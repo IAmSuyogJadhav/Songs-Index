@@ -36,7 +36,7 @@ def parse_songs(_songs):
                         )
 
 
-# Path to the Telegram Downloads folder and the index
+# Path to the Telegram Downloads folder and the index file
 telegram_path = r'/home/anon/Downloads/Telegram Desktop/'
 index_path = r'/home/anon/Interest/Projects/Songs-Index/index.xlsx'
 
