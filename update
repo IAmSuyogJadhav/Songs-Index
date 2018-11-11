@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 pushd .
 cd /home/anon/Interest/Projects/Songs-Index/
 python update-index.py
