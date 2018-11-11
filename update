@@ -1,0 +1,10 @@
+#!/bin/sh
+pushd .
+cd /home/anon/Interest/Projects/Songs-Index/
+python update-index.py
+git add .
+declare d="$(date -Idate)"
+declare t="$(date +%T)"
+git commit -m "Updated on $d at $t"
+git push
+popd
