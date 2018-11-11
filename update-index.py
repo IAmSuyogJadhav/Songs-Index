@@ -1,5 +1,6 @@
 import os
 import math
+import sys
 import re
 from datetime import datetime
 import pandas as pd
@@ -57,13 +58,31 @@ parsed = parse_songs(songs)
 print('Done.')
 print("Saving the Index file....", end='')
 
+writer = pd.ExcelWriter(index_path, engine='xlsxwriter')
 try:
-    parsed.to_excel(index_path, index=True, sheet_name='Songs')
-    print('Done')
+    parsed.to_excel(writer, sheet_name='Songs-Index')
+    worksheet = writer.sheets['Songs-Index']
+    pad = 1  # Additional padding per column
 
+    for idx, col in enumerate(parsed):
+        series = parsed[col]
+        max_len = max(
+            series.astype(str).map(len).max(),
+            len(str(series.name))
+        ) + pad
+
+        worksheet.set_column(idx, idx, max_len)
+
+    writer.save()
 except Exception as e:
-    print("Error.\nCouldn't save file. Try again.\n"
+    print("\nERROR: Couldn't save file. Something went wrong.\n"
           f"Current saving path:\n\t {index_path}"
           f"\nError Description:\n\t{e}")
+    sys.exit(1)
+
+print('Done')
+# try:
+#     parsed.to_excel(index_path, index=True, sheet_name='Songs')
+#
 
 print("\n#######################################################")
