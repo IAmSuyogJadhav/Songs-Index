@@ -53,9 +53,9 @@ print('Done')
 print(f"\nTotal no. of songs in the playlist: {len(songs)}")
 print("Parsing songs....")
 
-print(songs)  # DEBUG
+# print(songs)  # DEBUG
 parsed = parse_songs(songs)
-print(parsed)  # DEBUG
+# print(parsed)  # DEBUG
 print('Done.')
 print("Saving the Index file....", end='')
 
