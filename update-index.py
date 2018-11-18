@@ -1,28 +1,26 @@
 import os
 import math
 import sys
-import re
-from datetime import datetime
+from tinytag import TinyTag as tag
 import pandas as pd
 
 
 def parse_songs(_songs):
-    pattern = re.compile(r'(.+) - (.+) \[.+\.m4a')
     parsed = []
-    bad = []
     step = 25 / len(_songs)
 
     for i, song in enumerate(_songs):
-        stamp = datetime.fromtimestamp(os.path.getmtime(songs_path + song))
-        date = '-'.join(list(map(str, [stamp.day, stamp.month, stamp.year])))
+        tags = tag.get(songs_path + song)
 
-        try:
-            name, authors = re.findall(pattern, song)[0]
-            authors = ', '.join(authors.split('_ '))
-            parsed.append([name, authors, date])
-        except IndexError:  # Happens if the name is not correctly formatted
-            bad.append(song)
-            parsed.append([re.findall(r'(.+)\.m4a', song)[0], 'Unknown', date])
+        title = tags.title if tags.title else song[:-4]
+        year = tags.year if tags.year else 'Unknown'
+        artists = tags.artist if tags.artist else 'Unknown'
+        album = tags.album if (tags.album is None
+                               or tags.album.lower() != 'www.chiasenhac.com'
+                               ) else 'Unknown'
+        genre = tags.genre if tags.genre else 'Unknown'
+
+        parsed.append([title, album, artists, genre, year])
 
         print('\r' + f'Progress: '
               f"[{'=' * int((i+1) * step) + ' ' * (24 - int((i+1) * step))}]"
@@ -30,10 +28,9 @@ def parse_songs(_songs):
               end='')
 
     print('\n')
-    if len(bad):
-        print('WARNING: Following bad filenames were found.', *bad, sep="\n\t")
     return pd.DataFrame(parsed,
-                        columns=["Song Title", "Authors", "Date Modified"],
+                        columns=["Song Title", "Album",
+                                 "Artists", "Genre", "Year"],
                         index=range(1, len(parsed)+1)
                         )
 
@@ -82,8 +79,5 @@ except Exception as e:
     sys.exit(1)
 
 print('Done')
-# try:
-#     parsed.to_excel(index_path, index=True, sheet_name='Songs')
-#
 
 print("\n#######################################################\n")
