@@ -34,6 +34,7 @@ def parse_songs(_songs):
         print('WARNING: Following bad filenames were found.', *bad, sep="\n\t")
     return pd.DataFrame(parsed,
                         columns=["Song Title", "Authors", "Date Modified"],
+                        index=range(1, len(parsed)+1)
                         )
 
 
@@ -52,8 +53,9 @@ print('Done')
 print(f"\nTotal no. of songs in the playlist: {len(songs)}")
 print("Parsing songs....")
 
+print(songs)  # DEBUG
 parsed = parse_songs(songs)
-
+print(parsed)  # DEBUG
 print('Done.')
 print("Saving the Index file....", end='')
 
