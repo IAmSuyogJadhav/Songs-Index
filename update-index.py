@@ -46,10 +46,8 @@ print("#######################################################")
 print("\nLoading the list of songs....", end='')
 songs = [filename for filename in os.listdir(songs_path)
          if filename.endswith(format)]
-# Sort by date modified
-songs = sorted(songs,
-               key=lambda x: os.path.getmtime(songs_path + x),
-               reverse=False)
+# Sort by Name
+songs = sorted(songs)
 print('Done')
 print(f"\nTotal no. of songs in the playlist: {len(songs)}")
 print("Parsing songs....")
